@@ -1,0 +1,50 @@
+<section class="new-work-order">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Edit Asset</h2>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row">
+        <div class="form-padding" fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Name" name="asset-name" [(ngModel)]="asset.name"
+                   required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Type" name="asset-type" [(ngModel)]="asset.type"
+                   />
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Model" name="asset-model" [(ngModel)]="asset.model"
+                   />
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Serial" name="asset-serial" [(ngModel)]="asset.serial"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Date of acquisition" [(ngModel)]="asset.date" name="date-acquisition">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Building" [(ngModel)]="asset.buildingId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let building of buildings" [value]="building.Id">
+                {{ building.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Room" name="asset-room" [(ngModel)]="asset.room"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-padding">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!f.form.valid">Update</button>
+      </div>
+    </form><!-- end form -->
+  </div>
+</section>

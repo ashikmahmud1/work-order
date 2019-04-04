@@ -1,0 +1,79 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="print-section">
+  <div id="results">
+    <div class="container-fluid order-row" *ngFor="let workOrder of pageArray; let i=index">
+      <br>
+      <!--Department-->
+      <div class="department m-left-20" *ngIf="i!=0">{{workOrder.departmentName}}</div>
+      <!--Create Row With Title and Display Single Time-->
+      <div fxLayout="row" fxLayoutGap="0.3%" fxLayoutAlign="center" *ngIf="i==0">
+
+        <div fxFlex="10%">
+
+        </div>
+        <div fxFlex="60%">
+
+        </div>
+        <div fxFlex="10%">
+          <!--Date Open-->
+          <div class="row-title">Date Open</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Date Closed-->
+          <div class="row-title">Date Closed</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Hours Total-->
+          <div class="row-title">Hours Total</div>
+        </div>
+      </div>
+      <div class="department m-left-20" *ngIf="i==0">{{workOrder.departmentName}}</div>
+      <div fxLayout="row" fxLayoutGap="0.3%" fxLayoutAlign="center">
+
+        <div fxFlex="10%" class="m-left-20">
+          <div>{{workOrder.Id}}</div>
+        </div>
+        <div fxFlex="60%">
+          <!--Description-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Description</div>
+            <div fxFlex="85%">{{workOrder.description}}</div>
+          </div>
+          <!--Building-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Building</div>
+            <div fxFlex="85%">{{workOrder.buildingName}}</div>
+          </div>
+          <!--Room #-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Room #</div>
+            <div fxFlex="85%">{{workOrder.room}}</div>
+          </div>
+          <!--Comments-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Comments</div>
+            <div fxFlex="85%">{{workOrder.comment}}</div>
+          </div>
+          <!--Residents-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Residents</div>
+            <div fxFlex="85%">{{workOrder.residentName}}</div>
+          </div>
+        </div>
+        <div fxFlex="10%">
+          <!--Date Open-->
+          <div>{{workOrder.dateIssue | date}}</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Date Closed-->
+          <div>{{workOrder.dateCompleted | date}}</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Hours Total-->
+          <div>{{workOrder.timeWorked}}</div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<section class="new-work-order">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">New Department</h2>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row">
+        <div class="form-padding" fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Name" name="department-name" [(ngModel)]="department.name"
+                   required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Subcontractor" name="department-subcontractor" [(ngModel)]="department.subcontractor"
+                   />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-padding">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!f.form.valid">Save</button>
+      </div>
+    </form><!-- end form -->
+  </div>
+</section>

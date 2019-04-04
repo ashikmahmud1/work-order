@@ -1,0 +1,111 @@
+<section class="project-reporting">
+  <!--First title of the company-->
+  <h3 class="title">The Meth-Wick Community</h3>
+  <!--Work Order Number-->
+  <h3 >Project Order {{projectOrder.Id}}</h3>
+  <br>
+  <div>
+    <span class="strong requested-by">Requested By  : </span><span class="width-300">{{projectOrder.requestedBy}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong date-issue">Date Issued  : </span><span class="width-300">{{projectOrder.dateIssue | date}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong">Date Completed  : </span><span class="width-300">{{projectOrder.dateCompleted | date}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong pro-desc">Description  : </span><span class="width-300">{{projectOrder.description}}</span>
+  </div>
+  <br>
+  <!--Show the Asset Details-->
+  <div class="asset">
+    <h3 class="title asset-title"> Asset</h3>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+        <div>
+          <span class="strong">Name</span><span class="width-200">{{asset.name}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Type</span><span class="width-200">{{asset.type}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Model</span><span class="width-200">{{asset.model}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Serial</span><span class="width-200">{{asset.serial}}</span>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+        <div>
+          <span class="strong asset-room">Date</span><span class="width-200">{{asset.date | date}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong asset-building">Building</span><span class="width-200">{{assetBuilding}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong asset-room">Room</span><span class="width-200">{{asset.room}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="resident-building">
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="top center">
+        <h3 class="title resident-title">Resident</h3>
+        <div>
+          <span class="strong res-name">Name</span><span class="width-200">{{resident.name}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong res-building">Building</span><span class="width-200">{{residentBuilding}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong res-room">Room No</span><span class="width-200">{{resident.room}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong res-phone">Phone No</span><span class="width-200">{{resident.phone}}</span>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="top center">
+        <h3 class="title building-title">Department</h3>
+        <div>
+          <span class="strong dept-name">Name</span><span class="width-200">{{department.name}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Subcontractor</span><span class="width-200">{{department.subcontractor}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.workerName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.dateWorked | date}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="time-worked">
+          <mat-header-cell *matHeaderCellDef>Time Worked ( hr )</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.timeWorked }}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</section>

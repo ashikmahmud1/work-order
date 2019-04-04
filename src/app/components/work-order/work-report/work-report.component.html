@@ -1,0 +1,104 @@
+<section class="project-reporting">
+  <!--First title of the company-->
+  <h3 class="title">The Meth-Wick Community</h3>
+  <!--Work Order Number-->
+  <h3 >Work Order {{workOrder.Id}}</h3>
+  <br>
+  <div>
+    <span class="strong requested-by">Requested By  : </span><span class="width-300">{{workOrder.requestedBy}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong completed-by">Completed By  : </span><span class="width-300">{{workOrder.workerName}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong date-issue">Date Issued  : </span><span class="width-300">{{workOrder.dateIssue | date}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong">Date Completed  : </span><span class="width-300">{{workOrder.dateCompleted | date}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong wo-desc">Description  : </span><span class="width-300">{{workOrder.description}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong">Time Worked (hr):</span><span class="width-300">{{workOrder.timeWorked}}</span>
+  </div>
+  <br>
+  <div>
+    <span class="strong status">Status : </span><span class="width-300">{{workOrder.status}}</span>
+  </div>
+  <br>
+  <!--Show the Asset Details-->
+  <div class="asset">
+    <h3 class="title asset-title"> Asset</h3>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+        <div>
+          <span class="strong">Name</span><span class="width-200">{{asset.name}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Type</span><span class="width-200">{{asset.type}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Model</span><span class="width-200">{{asset.model}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Serial</span><span class="width-200">{{asset.serial}}</span>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+        <div>
+          <span class="strong asset-room">Date</span><span class="width-200">{{asset.date | date}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong asset-building">Building</span><span class="width-200">{{assetBuilding}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong asset-room">Room</span><span class="width-200">{{asset.room}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="resident-building">
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="top center">
+        <h3 class="title resident-title">Resident</h3>
+        <div>
+          <span class="strong res-name">Name</span><span class="width-200">{{resident.name}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong res-building">Building</span><span class="width-200">{{residentBuilding}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong res-room">Room No</span><span class="width-200">{{resident.room}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong res-phone">Phone No</span><span class="width-200">{{resident.phone}}</span>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="top center">
+        <h3 class="title building-title">Department</h3>
+        <div>
+          <span class="strong dept-name">Name</span><span class="width-200">{{department.name}}</span>
+        </div>
+        <br>
+        <div>
+          <span class="strong">Subcontractor</span><span class="width-200">{{department.subcontractor}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

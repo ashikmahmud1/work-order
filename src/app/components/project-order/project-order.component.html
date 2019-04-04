@@ -1,0 +1,122 @@
+<section class="project-workers">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Project Orders</h2>
+    <div class="filter-div" fxFlex fxLayout="column">
+      <div>
+        <mat-form-field class="width-250">
+          <input matInput [matDatepicker]="picker" placeholder="From" name="date-from" [(ngModel)]="filterData.fromDate" (ngModelChange)="onFilterProjectOrders()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="m-left-20 width-250">
+          <input matInput [matDatepicker]="picker2" placeholder="To" name="date-to" [(ngModel)]="filterData.toDate" (ngModelChange)="onFilterProjectOrders()">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Asset" [(ngModel)]="filterData.assetName" [ngModelOptions]="{standalone: true}" (ngModelChange)="onFilterProjectOrders()">
+            <mat-option [value]="''">{{''}}</mat-option>
+            <mat-option *ngFor="let asset of assets" [value]="asset.name">
+              {{ asset.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="m-left-20 width-250">
+          <mat-select placeholder="Resident" [(ngModel)]="filterData.residentName" [ngModelOptions]="{standalone: true}" (ngModelChange)="onFilterProjectOrders()">
+            <mat-option [value]="''">{{''}}</mat-option>
+            <mat-option *ngFor="let resident of residents" [value]="resident.name">
+              {{ resident.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="m-left-20 width-250">
+          <mat-select placeholder="Building" [(ngModel)]="filterData.buildingName" [ngModelOptions]="{standalone: true}" (ngModelChange)="onFilterProjectOrders()">
+            <mat-option [value]="''">{{''}}</mat-option>
+            <mat-option *ngFor="let building of buildings" [value]="building.name">
+              {{ building.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <div class="flex">
+        <div class="padding-top">
+          <button type="button" mat-raised-button color="primary" (click)="Navigate()">Add New Project Order</button>
+        </div>
+        <mat-form-field>
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter..">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <div class="form-padding" fxLayout="column" class="table-width">
+        <mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="Id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Id}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="departmentName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.departmentName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="assetName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Asset</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.assetName }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="buildingName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Building</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.buildingName }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="residentName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Resident</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.residentName }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="requestedBy">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Request By</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.requestedBy }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Amount($)</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.amount }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="dateIssue">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Issue</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.dateIssue | date}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="dateCompleted">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Completed</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.dateCompleted | date}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="action" cdkColumnDef="action">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-raised-button type="button" color="primary" (click)="onEditProjectOrder(element.Id)">Edit
+              </button>
+              <button mat-raised-button type="button" color="accent" (click)="onReportProjectOrder(element.Id)">Print
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+    <mat-paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+    <div>
+      <div class="padding-top print-all">
+        <button type="button" class="float-right" mat-raised-button color="accent" (click)="onPrintAll()">Print All</button>
+      </div>
+    </div>
+  </div>
+</section>

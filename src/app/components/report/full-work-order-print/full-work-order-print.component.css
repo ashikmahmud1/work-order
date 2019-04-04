@@ -1,0 +1,36 @@
+#results{
+  width: 1300px;
+  margin: 30px auto;
+  border: 1px solid #3f51b5;
+
+}
+.filter-div{
+  width: 1300px;
+  margin: 30px auto;
+}
+.m-left-20{
+  margin-left: 20px;
+}
+.width-250{
+  width: 250px;
+  margin: 5px;
+}
+.row-title{
+  font-size: 18px;
+  font-weight: bold;
+}
+.order-row{
+  border-bottom: 1px solid black;
+}
+.department{
+  font-weight: bold;
+  font-size: 20px;
+  display: inline-block;
+  border-bottom: 1px solid darkred;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+}
+.text-center{
+  text-align: center;
+  padding: 10px;
+}

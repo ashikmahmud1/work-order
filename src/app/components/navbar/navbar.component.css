@@ -1,0 +1,42 @@
+mat-sidenav-container,mat-sidenav-content,mat-sidenav{
+  height: 100%;
+}
+mat-sidenav{
+  width: 250px;
+}
+.mat-nav-list{
+  padding-top: 0;
+}
+.mat-list-item{
+  color: #3f51b5;
+}
+a{
+  text-decoration: none;
+  color: #3f51b5;
+  transition: all .5s;
+}
+a:hover,a:active{
+  color: #f44336;
+}
+.navigation-items{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.logo{
+  margin-left: 20px;
+}
+.side-nav-logo{
+  text-align: center;
+  color: #ffffff;
+  background-color:#3f51b5;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.mat-toolbar{
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  /*box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);*/
+}
+.l-padding-10{
+  padding-left: 10px;
+}

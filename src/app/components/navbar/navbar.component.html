@@ -1,0 +1,87 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <mat-nav-list>
+      <div class="side-nav-logo">
+        The Meth-Wick Community
+      </div>
+      <a mat-list-item routerLink="/new-project-order" (click)="sidenav.close()">
+        <mat-icon>add circle</mat-icon>
+        <span class="nav-caption">New Project Orders</span>
+      </a>
+      <a mat-list-item routerLink="/new-work-order" (click)="sidenav.close()">
+        <mat-icon>add circle</mat-icon>
+        <span class="nav-caption l-padding-10">New Work Orders</span>
+      </a>
+      <a mat-list-item routerLink="/new-resident" (click)="sidenav.close()">
+        <mat-icon>add circle</mat-icon>
+        <span class="nav-caption l-padding-10">New Resident</span>
+      </a>
+      <a mat-list-item routerLink="/new-worker" (click)="sidenav.close()">
+        <mat-icon>add circle</mat-icon>
+        <span class="nav-caption l-padding-10">New Worker</span>
+      </a>
+      <a mat-list-item routerLink="/new-department" (click)="sidenav.close()">
+        <mat-icon>add circle</mat-icon>
+        <span class="nav-caption l-padding-10">New Department</span>
+      </a>
+      <a mat-list-item routerLink="/new-asset" (click)="sidenav.close()">
+        <mat-icon>add circle</mat-icon>
+        <span class="nav-caption l-padding-10">New Asset</span>
+      </a>
+      <a mat-list-item routerLink="/new-building" (click)="sidenav.close()">
+        <mat-icon>add circle</mat-icon>
+        <span class="nav-caption l-padding-10">New Building</span>
+      </a>
+      <a mat-list-item routerLink="/full-work-order" (click)="sidenav.close()">
+        <mat-icon>group</mat-icon>
+        <span class="nav-caption l-padding-10">Report Full Work Order</span>
+      </a>
+      <a mat-list-item routerLink="/staff-time-worked" (click)="sidenav.close()">
+        <mat-icon>group</mat-icon>
+        <span class="nav-caption l-padding-10">Report Worker Time</span>
+      </a>
+      <a mat-list-item routerLink="/average-days-complete-work-orders" (click)="sidenav.close()">
+        <mat-icon>group</mat-icon>
+        <span class="nav-caption l-padding-10">Report Avg Days All</span>
+      </a>
+      <a mat-list-item routerLink="/average-days-complete-work-orders-by-property" (click)="sidenav.close()">
+        <mat-icon>group</mat-icon>
+        <span class="nav-caption l-padding-10">Report Avg Per Building</span>
+      </a>
+      <a mat-list-item routerLink="/average-days-complete-work-orders-by-property-department" (click)="sidenav.close()">
+        <mat-icon>group</mat-icon>
+        <span class="nav-caption l-padding-10">Report Per Building Department</span>
+      </a>
+      <a mat-list-item routerLink="/settings" (click)="sidenav.close()">
+        <mat-icon>settings</mat-icon>
+        <span class="nav-caption l-padding-10">Settings</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar id="mat-toolbar" color="primary">
+      <div>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div class="logo">The Meth-Wick Community</div>
+      <div fxFlex fxLayout fxLayoutAlign="flex-end">
+        <ul fxLayout fxLayoutGap="30px" class="navigation-items">
+          <li><a mat-raised-button routerLink="./" >Project Orders</a></li>
+          <!--<li><a mat-raised-button routerLink="/project-worker">Project Workers</a></li>-->
+          <li><a mat-raised-button routerLink="/work-order">Work Orders</a></li>
+          <li><a mat-raised-button routerLink="/resident">Residents</a></li>
+          <li><a mat-raised-button routerLink="/worker">Workers</a></li>
+          <li><a mat-raised-button routerLink="/department">Departments</a></li>
+          <li><a mat-raised-button routerLink="/building">Buildings</a></li>
+          <li><a mat-raised-button routerLink="/asset">Assets</a></li>
+
+        </ul>
+      </div>
+    </mat-toolbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

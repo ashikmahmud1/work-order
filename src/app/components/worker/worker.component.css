@@ -1,0 +1,27 @@
+.mat-row,.mat-header-row{
+  width: 1100px;
+}
+.flex{
+  width: 1100px;
+  display: flex;
+  justify-content: space-between;
+}
+mat-form-field{
+  width: 300px;
+}
+.padding-top{
+  padding-top: 15px;
+}
+.mat-paginator{
+  width: 1100px;
+}
+.mat-column-action {
+  flex: 1 1 100px;
+}
+.float-right{
+  float: right;
+}
+.print-all{
+  width: 1100px;
+
+}

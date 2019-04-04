@@ -1,0 +1,34 @@
+<section class="new-work-order">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Edit Resident</h2>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row">
+        <div class="form-padding" fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Resident Name" name="resident-name" [(ngModel)]="resident.name"
+                   required/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Building" [(ngModel)]="resident.buildingId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let building of buildings" [value]="building.Id">
+                {{ building.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput class="form-control" name="room-no" placeholder="Room no." [(ngModel)]="resident.room"
+                   />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Phone No" name="phone-no" [(ngModel)]="resident.phone"
+                   />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-padding">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!f.form.valid">Update</button>
+      </div>
+    </form><!-- end form -->
+  </div>
+</section>

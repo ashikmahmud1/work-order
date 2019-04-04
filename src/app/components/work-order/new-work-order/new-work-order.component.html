@@ -1,0 +1,151 @@
+<section class="new-work-order">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">New Work Order</h2>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+      <div fxLayout="row">
+        <div class="form-padding" fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="WORK ORDER NUMBER" name="order-number"
+                   [(ngModel)]="newWorkOrder.Id" [disabled]="true"
+                   required/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Department" [(ngModel)]="newWorkOrder.departmentId"
+                        [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let department of departments" [value]="department.Id">
+                {{ department.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+          <textarea matInput placeholder="Description" rows="4" name="description"
+                    [(ngModel)]="newWorkOrder.description"></textarea>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Building Location" (selectionChange)="onChangeBuilding()"
+                        [(ngModel)]="newWorkOrder.buildingId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let building of buildings" [value]="building.Id">
+                {{ building.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Asset" [(ngModel)]="newWorkOrder.assetId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let asset of assets" [value]="asset.Id">
+                {{ asset.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Requested By" name="requested-by"
+                   [(ngModel)]="newWorkOrder.requestedBy"
+                   required/>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput placeholder="Amount ( $ )" min="0" name="amount"
+                   [(ngModel)]="newWorkOrder.amount"/>
+          </mat-form-field>
+          <div fxFlex>
+            <mat-form-field class="width-350">
+              <mat-select placeholder="Add worker" [(ngModel)]="newWorkOrder.workerId"
+                          [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let worker of workers" [value]="worker.Id">
+                  {{ worker.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button type="button" class="width-70 m-left-20" mat-raised-button color="primary" (click)="onAddWorker()">
+              Add
+            </button>
+          </div>
+          <ul class="work-time-list">
+            <li *ngFor="let worker of workersTimeWorked">
+              <label class="badge">{{worker.workerName}}</label>
+              <mat-form-field class="width-150">
+                <input type="number" matInput min="0" placeholder="hr" value="{{worker.timeWorked}}"
+                       (change)="onUpdateWorkerTime($event.target.value,worker.workerId)"/>
+              </mat-form-field>
+              <button type="button" class="width-70 m-left-20" mat-raised-button color="warn"
+                      (click)="onRemoveWorker(worker.workerId)">Remove
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="form-padding" fxLayout="column">
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date Issued" name="date-issued"
+                   [(ngModel)]="newWorkOrder.dateIssue">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Date Completed"
+                   [(ngModel)]="newWorkOrder.dateCompleted" name="date-completed" (ngModelChange)="onCompleted()">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+          <textarea matInput placeholder="Comment" rows="4" name="comment"
+                    [(ngModel)]="newWorkOrder.comment"></textarea>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Status" [(ngModel)]="newWorkOrder.status" [ngModelOptions]="{standalone: true}"
+                        [disabled]="true">
+              <mat-option *ngFor="let status of statuss" [value]="status.value">
+                {{ status.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Resident" (selectionChange)="onChangeResident()" [(ngModel)]="newWorkOrder.residentId"
+                        [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let resident of residents" [value]="resident.Id">
+                {{ resident.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" matInput class="form-control" name="room" placeholder="Room"
+                   [(ngModel)]="newWorkOrder.room" (change)="onChangeRoom()"/>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="tel" matInput class="form-control" name="phone" placeholder="Phone"
+                   [(ngModel)]="newWorkOrder.phone"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="number" matInput class="form-control" min="0" name="time-worked"
+                   placeholder="Amount of Time Worked" [(ngModel)]="newWorkOrder.timeWorked" [disabled]="true"
+                   required/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="m-top-20 m-left-20">
+        <mat-checkbox [checked]="isBuilding" (change)="isResident= !isBuilding" name="isBuilding"
+                      [(ngModel)]="isBuilding">Building
+        </mat-checkbox>
+        <mat-checkbox class="m-left-20" [checked]="isResident" name="isResident" (change)="isBuilding = !isResident"
+                      [(ngModel)]="isResident">Resident
+        </mat-checkbox>
+      </div>
+      <div class="form-padding">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!f.form.valid">Save</button>
+        <button type="button" class="m-left-40" mat-raised-button color="accent" (click)="onPrintWorkOrder()"
+                [disabled]="!f.form.valid">Save & Print
+        </button>
+      </div>
+    </form><!-- end form -->
+  </div>
+</section>

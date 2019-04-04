@@ -1,0 +1,48 @@
+mat-form-field,.button-width,button{
+  width: 480px;
+}
+.table-form-input{
+  width: 200px;
+}
+.form-padding{
+  padding: 20px 20px 20px 0;
+}
+.m-left-20{
+  margin-left: 20px;
+}
+.l-padding-20{
+  padding-left: 20px;
+}
+h2{
+  color: #3f51b5;
+}
+.m-top-10{
+  margin-top: 10px;
+}
+.m-top-18{
+  margin-top: 18px;
+}
+.mat-row,.mat-header-row{
+  width: 1000px;
+}
+.flex{
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+}
+.padding-top{
+  padding-top: 15px;
+}
+.mat-paginator{
+  width: 1000px;
+}
+.m-left-40{
+  margin-left: 40px;
+}
+.width-350{
+  width: 350px;
+}
+.width-70{
+  width: 70px;
+}
+

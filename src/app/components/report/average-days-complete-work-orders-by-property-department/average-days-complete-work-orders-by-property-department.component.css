@@ -1,0 +1,30 @@
+.mat-row,.mat-header-row{
+  width: 1000px;
+}
+.flex{
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+}
+mat-form-field{
+  width: 250px;
+}
+.padding-top{
+  padding-top: 15px;
+}
+.mat-paginator{
+  width: 1000px;
+}
+.mat-column-action {
+  flex: 1 1 100px;
+}
+.float-right{
+  float: right;
+}
+.print-all{
+  width: 1000px;
+
+}
+.m-top-70{
+  margin-top: 70px;
+}

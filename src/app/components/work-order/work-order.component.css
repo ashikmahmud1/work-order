@@ -1,0 +1,43 @@
+.title{
+  color: #3f51b5;
+}
+.mat-row,.mat-header-row{
+  width: 1300px;
+}
+.flex{
+  width: 1300px;
+  display: flex;
+  justify-content: space-between;
+}
+mat-form-field{
+  width: 300px;
+}
+
+.width-250{
+  width: 250px;
+}
+.padding-top{
+  padding-top: 15px;
+}
+.mat-paginator{
+  width: 1300px;
+}
+.mat-column-action {
+  flex: 1 1 70px;
+}
+.print-all{
+  width: 1300px;
+
+}
+.float-right{
+  float: right;
+}
+.filter-div{
+  margin-bottom: 130px;
+}
+.m-left-20{
+  margin-left: 20px;
+}
+.m-left-10{
+  margin-left: 5px;
+}

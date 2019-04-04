@@ -1,0 +1,131 @@
+<section class="new-work-order">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Edit Project Order</h2>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row">
+        <div class="form-padding" fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="PROJECT ORDER NUMBER" name="order-number" [(ngModel)]="projectOrder.Id" [disabled]="true"
+                   required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Department" [(ngModel)]="projectOrder.departmentId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let department of departments" [value]="department.Id">
+                {{ department.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Building Location" (selectionChange)="onChangeBuilding()" [(ngModel)]="projectOrder.buildingId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let building of buildings" [value]="building.Id">
+                {{ building.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Asset" [(ngModel)]="projectOrder.assetId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let asset of assets" [value]="asset.Id">
+                {{ asset.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="number" matInput placeholder="Amount ( $ )" name="charge-to" [(ngModel)]="projectOrder.amount"
+                   required/>
+          </mat-form-field>
+          <br><br>
+          <mat-form-field class="m-top-18">
+            <input type="text" matInput class="form-control" placeholder="Requested By" name="requested-by" [(ngModel)]="projectOrder.requestedBy"
+                   required/>
+          </mat-form-field>
+          <div class="m-top-10">
+            <mat-checkbox [checked]="isBuilding" (change)="isResident= !isBuilding" name="isBuilding" [(ngModel)]="isBuilding">Building</mat-checkbox>
+            <mat-checkbox class="m-left-20" [checked]="isResident" name="isResident" (change)="isBuilding = !isResident" [(ngModel)]="isResident">Resident</mat-checkbox>
+          </div>
+        </div>
+        <div class="form-padding" fxLayout="column">
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date Issued" name="date-issued" [(ngModel)]="projectOrder.dateIssue">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Date Completed" name="date-completed" [(ngModel)]="projectOrder.dateCompleted">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Resident" (selectionChange)="onChangeResident()" [(ngModel)]="projectOrder.residentId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let resident of residents" [value]="resident.Id">
+                {{ resident.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="email" matInput class="form-control" name="room"
+                   placeholder="Room" [(ngModel)]="projectOrder.room" (change)="onChangeRoom()"/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="tel" matInput class="form-control" name="phone" placeholder="Phone" [(ngModel)]="projectOrder.phone"
+                   />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Description/Attachment" [(ngModel)]="projectOrder.description" name="description" rows="4"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div class="form-padding" fxLayout="column" class="table-width">
+          <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="worker">
+              <mat-header-cell *matHeaderCellDef >Worker</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.workerName}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <!--DatePicker-->
+                <mat-form-field class="table-form-input">
+                  <input matInput [matDatepicker]="picker" name="date-worked" [value]="element.dateWorked" (dateChange)="updateDateWorked($event.target.value,element.workerId)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="time-worked">
+              <mat-header-cell *matHeaderCellDef>Time Worked ( hr )</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <!--Input box which will input number Time worked-->
+                <mat-form-field class="table-form-input">
+                  <input type="number" matInput class="form-control" [value]="element.timeWorked"  name="timeWorked" (change)="updateTimeWorked($event.target.value,element.workerId)"
+                         required/>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </div>
+      </div>
+      <mat-paginator
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 20]"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
+      <div class="form-padding">
+        <button type="submit" mat-raised-button color="primary" class="button-width" [disabled]="!f.form.valid">Update</button>
+        <button type="button" mat-raised-button color="accent" (click)="onPrintProjectOrder()" [disabled]="!f.form.valid">Print</button>
+      </div>
+    </form><!-- end form -->
+  </div>
+</section>

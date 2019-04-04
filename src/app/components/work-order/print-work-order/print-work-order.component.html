@@ -1,0 +1,122 @@
+<section class="new-work-order">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Work Order</h2>
+    <div fxLayout="row">
+      <div class="form-padding" fxLayout="column">
+        <mat-form-field>
+          <input type="text" matInput class="form-control" placeholder="WORK ORDER NUMBER" name="order-number"
+                 [(ngModel)]="workOrder.Id"
+                 required/>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Department" [(ngModel)]="workOrder.departmentId"
+                      [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let department of departments" [value]="department.Id">
+              {{ department.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <label>Description</label>
+          <p>{{workOrder.description}}</p>
+        </div>
+
+        <mat-form-field>
+          <mat-select placeholder="Building Location" [(ngModel)]="workOrder.buildingId"
+                      [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let building of buildings" [value]="building.Id">
+              {{ building.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Asset" [(ngModel)]="workOrder.assetId" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let asset of assets" [value]="asset.Id">
+              {{ asset.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="text" matInput class="form-control" placeholder="Requested By" name="requested-by"
+                 [(ngModel)]="workOrder.requestedBy"
+                 required/>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="number" matInput placeholder="Amount ( $ )" name="amount" [(ngModel)]="workOrder.amount"
+          />
+        </mat-form-field>
+        <label>Labors completed by</label>
+        <br>
+        <ul class="work-time-list">
+          <li *ngFor="let worker of workOrder.workersTimeWorked">
+            <label class="badge">{{worker.workerName}}</label>
+            <mat-form-field class="width-150">
+              <input type="text" matInput name="amount" value="{{worker.timeWorked}} (hr)"/>
+            </mat-form-field>
+          </li>
+        </ul>
+      </div>
+      <div class="form-padding" fxLayout="column">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date Issued" name="date-issued"
+                 [(ngModel)]="workOrder.dateIssue">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Date Completed" [(ngModel)]="workOrder.dateCompleted"
+                 name="date-completed">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <div>
+          <label>Comment</label>
+          <p>
+            {{workOrder.comment}}
+          </p>
+        </div>
+
+        <mat-form-field>
+          <mat-select placeholder="Status" [(ngModel)]="workOrder.status" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let status of statuss" [value]="status.value">
+              {{ status.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Resident" [(ngModel)]="workOrder.residentId" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let resident of residents" [value]="resident.Id">
+              {{ resident.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="email" matInput class="form-control" name="room" placeholder="Room" [(ngModel)]="workOrder.room"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input type="tel" matInput class="form-control" name="phone" placeholder="Phone" [(ngModel)]="workOrder.phone"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="number" matInput class="form-control" name="time-worked" placeholder="Amount of Time Worked"
+                 [(ngModel)]="workOrder.timeWorked"
+                 required/>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="m-top-20 m-left-20">
+      <mat-checkbox name="isBuilding" [(ngModel)]="workOrder.buildingCheck">Building</mat-checkbox>
+      <mat-checkbox class="m-left-20" name="isResident" [(ngModel)]="workOrder.residentCheck">Resident</mat-checkbox>
+    </div>
+  </div>
+</section>

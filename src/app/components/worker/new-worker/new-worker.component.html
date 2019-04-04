@@ -1,0 +1,37 @@
+<section class="new-work-order">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">New Worker</h2>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row">
+        <div class="form-padding" fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Name" name="worker-name" [(ngModel)]="worker.name"
+                   required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="email" matInput class="form-control" name="worker-email" placeholder="Email" [(ngModel)]="worker.email"
+                   />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Phone No" name="phone-no" [(ngModel)]="worker.phone"
+                   />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Department" [(ngModel)]="worker.DeptId" (change)="checkDeptId()" [ngModelOptions]="{standalone: true}" required>
+              <mat-option *ngFor="let department of departments" [value]="department.Id">
+                {{ department.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+      <div class="form-padding">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!f.form.valid">Save</button>
+      </div>
+    </form><!-- end form -->
+  </div>
+</section>

@@ -1,0 +1,49 @@
+<section class="settings">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Settings</h2>
+    <mat-progress-bar id="import-export-progress" mode="indeterminate"></mat-progress-bar>
+    <div class="import-export-data">
+      <div>
+        <button type="button" id="import-button" mat-raised-button color="primary" (click)="onImportData()">Import Data</button>
+      </div>
+      <br>
+      <div>
+        <button type="button" id="export-button" mat-raised-button color="accent" (click)="onExportData()">Export Data</button>
+      </div>
+      <br>
+      <div>
+        <button type="button" id="remove-button" mat-raised-button color="warn" (click)="onRemoveData()">Remove Data</button>
+      </div>
+      <br>
+      <div>
+        <!--Here display the from text-box and to text-box-->
+        <mat-form-field class="width-250">
+          <input matInput [matDatepicker]="picker" placeholder="From" name="date-from" [(ngModel)]="fromDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="m-left-90 width-250">
+          <input matInput [matDatepicker]="picker2" placeholder="To" name="date-to" [(ngModel)]="toDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button type="button" id="archive-button" mat-raised-button color="primary" (click)="onImportFromArchive()">Import From Archive</button>
+        </div>
+      </div>
+      <br>
+      <div>
+        <!--Here display the from text-box and to text-box-->
+        <mat-form-field class="w-500">
+          <input matInput [matDatepicker]="pickerBeforeDate" placeholder="Before Date" name="before-date" [(ngModel)]="beforeDate">
+          <mat-datepicker-toggle matSuffix [for]="pickerBeforeDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerBeforeDate></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button type="button" id="archive-write-button" mat-raised-button color="accent" (click)="writeToArchiveByDateRange()">Write To Archive</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

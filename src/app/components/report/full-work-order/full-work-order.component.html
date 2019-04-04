@@ -1,0 +1,135 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="print-section">
+  <div class="filter-div">
+    <div>
+      <mat-form-field class="width-250">
+        <input matInput [matDatepicker]="picker" placeholder="From" name="date-from" [(ngModel)]="filterData.fromDate"
+               (ngModelChange)="onFilterWorkOrders()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="m-left-20 width-250">
+        <input matInput [matDatepicker]="picker2" placeholder="To" name="date-to" [(ngModel)]="filterData.toDate"
+               (ngModelChange)="onFilterWorkOrders()">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+
+      <mat-form-field class="width-250 m-left-20">
+        <mat-select placeholder="Building" [(ngModel)]="filterData.buildingId" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onFilterWorkOrders()">
+          <mat-option [value]="null">{{''}}</mat-option>
+          <mat-option *ngFor="let building of buildings" [value]="building.Id">
+            {{ building.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="m-left-20 width-250">
+        <mat-select placeholder="Room" [(ngModel)]="filterData.room" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onFilterWorkOrders()">
+          <mat-option [value]="null">{{''}}</mat-option>
+          <mat-option *ngFor="let room of rooms" [value]="room">
+            {{ room }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="width-250">
+        <mat-select placeholder="Status" [(ngModel)]="filterData.status" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onFilterWorkOrders()">
+          <mat-option *ngFor="let status of statuss" [value]="status.value">
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div id="results">
+    <div class="container-fluid order-row" *ngFor="let workOrder of pageArray; let i=index">
+      <br>
+      <!--Department-->
+      <div class="department m-left-20" *ngIf="i!=0">{{workOrder.departmentName}}</div>
+      <!--Create Row With Title and Display Single Time-->
+      <div fxLayout="row" fxLayoutGap="0.3%" fxLayoutAlign="center" *ngIf="i==0">
+
+        <div fxFlex="10%">
+
+        </div>
+        <div fxFlex="60%">
+
+        </div>
+        <div fxFlex="10%">
+          <!--Date Open-->
+          <div class="row-title">Date Open</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Date Closed-->
+          <div class="row-title">Date Closed</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Hours Total-->
+          <div class="row-title">Hours Total</div>
+        </div>
+      </div>
+      <div class="department m-left-20" *ngIf="i==0">{{workOrder.departmentName}}</div>
+      <div fxLayout="row" fxLayoutGap="0.3%" fxLayoutAlign="center">
+
+        <div fxFlex="10%" class="m-left-20">
+          <div>{{workOrder.Id}}</div>
+        </div>
+        <div fxFlex="60%">
+          <!--Description-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Description</div>
+            <div fxFlex="85%">{{workOrder.description}}</div>
+          </div>
+          <!--Building-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Building</div>
+            <div fxFlex="85%">{{workOrder.buildingName}}</div>
+          </div>
+          <!--Room #-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Room #</div>
+            <div fxFlex="85%">{{workOrder.room}}</div>
+          </div>
+          <!--Comments-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Comments</div>
+            <div fxFlex="85%">{{workOrder.comment}}</div>
+          </div>
+          <!--Residents-->
+          <div fxLayout="row">
+            <div fxFlex="15%" class="row-title">Residents</div>
+            <div fxFlex="85%">{{workOrder.residentName}}</div>
+          </div>
+        </div>
+        <div fxFlex="10%">
+          <!--Date Open-->
+          <div>{{workOrder.dateIssue | date}}</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Date Closed-->
+          <div>{{workOrder.dateCompleted | date}}</div>
+        </div>
+        <div fxFlex="10%">
+          <!--Hours Total-->
+          <div>{{workOrder.timeWorked}}</div>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div class="text-center">
+      <button mat-raised-button type="button" (click)="download()" color="primary">SAVE AS PDF</button>
+    </div>
+    <mat-paginator
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true" (page)="onChangePage($event)">
+    </mat-paginator>
+  </div>
+</div>

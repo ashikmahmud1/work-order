@@ -1,0 +1,54 @@
+<section class="avg-days-completed-orders">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Average number of Days to Complete Work Orders by Property</h2>
+    <div class="m-top-70">
+      <div class="flex">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Start Date" name="date-issued" [(ngModel)]="minDateIssue" (ngModelChange)="onChangeCompleteWorkOrdersByBuilding()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="End Date" name="date-completed" [(ngModel)]="maxDateCompleted" (ngModelChange)="onChangeCompleteWorkOrdersByBuilding()">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div class="form-padding" fxLayout="column" class="table-width">
+        <mat-table [dataSource]="dataSource" >
+          <ng-container matColumnDef="building">
+            <mat-header-cell *matHeaderCellDef>Building</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.building}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="date-range">
+            <mat-header-cell *matHeaderCellDef>Date Range</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.dateRange}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="completed-orders">
+            <mat-header-cell *matHeaderCellDef>Total Work Orders Completed</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.completedOrders}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="avg-time">
+            <mat-header-cell *matHeaderCellDef>Average Number of Days Between: Issued-Completed	</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.avg_time}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+    <mat-paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+    <div>
+      <div class="padding-top print-all">
+        <button type="button" class="float-right" mat-raised-button color="accent" (click)="onPrintReport()">Print</button>
+      </div>
+    </div>
+  </div>
+</section>

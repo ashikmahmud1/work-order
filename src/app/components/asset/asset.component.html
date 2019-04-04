@@ -1,0 +1,73 @@
+<section class="project-workers">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="title">Assets</h2>
+    <div>
+      <div class="flex">
+        <div class="padding-top">
+          <button type="button" mat-raised-button color="primary" (click)="Navigate()">Add New Asset</button>
+        </div>
+        <mat-form-field>
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter..">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <div class="form-padding" fxLayout="column" class="table-width">
+        <mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="Id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Id}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="model">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Model</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.model}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="serial">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Serial</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.serial}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Acquisition</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.date | date}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="buildingName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Location</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.buildingName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="action" cdkColumnDef="action">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-raised-button type="button" color="primary" (click)="onEditAsset(element.Id)">Edit</button>
+              <button mat-raised-button type="button" color="warn" (click)="onDeleteAsset(element.Id)">Delete</button>
+            </mat-cell>
+          </ng-container>
+          <!--<ng-container matColumnDef="action">-->
+          <!--<mat-header-cell *matHeaderCellDef>Action</mat-header-cell>-->
+          <!--<mat-cell *matCellDef>-->
+          <!--<button mat-raised-button type="button" color="primary">Edit</button>-->
+          <!--<button mat-raised-button type="button" color="warn">Delete</button>-->
+          <!--</mat-cell>-->
+          <!--</ng-container>-->
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+    <mat-paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+    <div>
+      <div class="padding-top print-all">
+        <button type="button" class="float-right" mat-raised-button color="accent" (click)="onPrintAll()">Print All</button>
+      </div>
+    </div>
+  </div>
+</section>
